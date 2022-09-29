@@ -20,7 +20,7 @@ function App() {
   return (
     <div>
       <UserBar />
-      <PostList posts={testPost} />
+      <PostList posts={testPost} /> 
     </div>
   );
 }

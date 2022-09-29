@@ -1,6 +1,7 @@
 //import { useState } from 'react'
 import UserBar from './Components/User/UserBar'
 import PostList from './Components/post/PostList';
+import CreatePost from './Components/post/CreatePost';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
     <div>
       <UserBar />
       <PostList posts={testPost} /> 
+      <CreatePost user="ben"/>
     </div>
   );
 }

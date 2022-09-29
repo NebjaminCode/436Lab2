@@ -3,7 +3,7 @@ import Logout from './Logout'
 import Register from './Register'
 
 export default function UserBar() {
-    const user = ''
+    const user = 'Ben'
     if (user) {return <Logout user={user} />}
     else {
         return (

@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-export default function CreateTodo({ user, posts, dispatch }) {
+export default function CreateTodo({ user, todos, dispatch }) {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [description, setDescription] = useState("");
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
         dispatch({
-          type: "CREATE_POST",
+          type: "CREATE_TODO",
           title,
-          content,
+          description,
           author: user,
           id: uuidv4(),
         });
@@ -31,8 +31,8 @@ export default function CreateTodo({ user, posts, dispatch }) {
         />
       </div>
       <textarea
-        value={content}
-        onChange={(event) => setContent(event.target.value)}
+        value={description}
+        onChange={(event) => setDescription(event.target.value)}
       />
       <input type="submit" value="Create" />
     </form>

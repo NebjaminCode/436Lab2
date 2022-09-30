@@ -1,30 +1,41 @@
-import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { useState, useReducer } from "react";
 import UserBar from "./Components/User/UserBar";
 import PostList from "./Components/post/PostList";
 import CreatePost from "./Components/post/CreatePost";
+import appReducer from "./Reducers";
 
 function App() {
-  const initialPosts = [
+  const defaultPosts = [
     {
       title: "first post",
       content: "first content",
       author: "Ben",
+      id: uuidv4(),
     },
     {
       title: "second post",
       content: "second content",
       author: "Ben",
+      id: uuidv4(),
     },
   ];
 
-  const [user, setUser] = useState("");
-  const [posts, setPosts] = useState(initialPosts);
+  // const [user, dispatchUser] = useReducer(userReducer, "");
+  // const [posts, dispatchPosts] = useReducer(postReducer, defaultPosts);
+
+  const [state, dispatch] = useReducer(appReducer, {
+    user: "",
+    posts: defaultPosts,
+  });
 
   return (
     <div>
-      <UserBar user={user} setUser={setUser} />
-      <PostList posts={posts} />
-      {user && <CreatePost user={user} posts={posts} setPosts={setPosts} />}
+      <UserBar user={state.user} dispatch={dispatch} />
+      <PostList posts={state.posts} />
+      {state.user && (
+        <CreatePost user={state.user} posts={state.posts} dispatch={dispatch} />
+      )}
     </div>
   );
 }

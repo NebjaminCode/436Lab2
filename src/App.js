@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 import { useState, useReducer } from "react";
 import UserBar from "./Components/User/UserBar";
-import PostList from "./Components/post/PostList";
-import CreatePost from "./Components/post/CreatePost";
+import PostTodo from "./Components/post/PostTodo";
+import CreateTodo from "./Components/post/CreateTodo";
 import appReducer from "./Reducers";
 
 function App() {
@@ -32,9 +32,9 @@ function App() {
   return (
     <div>
       <UserBar user={state.user} dispatch={dispatch} />
-      <PostList posts={state.posts} />
+      <PostTodo posts={state.posts} />
       {state.user && (
-        <CreatePost user={state.user} posts={state.posts} dispatch={dispatch} />
+        <CreateTodo user={state.user} posts={state.posts} dispatch={dispatch} />
       )}
     </div>
   );

@@ -32,8 +32,6 @@ function todoReducer(state, action) {
             ...item,
             complete: !item.complete,
             dateCompleted: Date(),
-            // moved below logic to a ternary in todo...bad idea?
-            //dateCompleted: item.complete === false ? Date() : "Not Yet",
           };
           return toggled;
         }
@@ -42,9 +40,9 @@ function todoReducer(state, action) {
       return toggleTodo;
     // below should delete a todo with a specific uuid
     // currently deletes ALL completed todos
+    // fixed by moving complete check to inside each Todo
     case "DELETE_TODO":
-      return state.filter((item) => item.id !== action.id && !item.complete);
-
+      return state.filter((item) => item.id !== action.id);
     default:
       return state;
   }

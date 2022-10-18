@@ -24,7 +24,7 @@ export default function Todo({
       <br />
 
       {<div>Date Created: {dateCreated}</div>}
-      {<div>Date Completed: {complete ? Date() : "nope"}</div>}
+      {<div>Date Completed: {complete ? dateCompleted : "get to work!"}</div>}
       <div>
         Complete? {complete ? "Yes" : "No"}
         <input

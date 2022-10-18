@@ -1,9 +1,12 @@
 import { useState } from "react";
 
 export default function Register({ dispatch }) {
+  // local statehooks to keep track of text input fields
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
+
+  // old handleXXXX functions, replaced by lambdas below
   //   function handleUsername(evt) {
   //     setUsername(evt.target.value);
   //   }

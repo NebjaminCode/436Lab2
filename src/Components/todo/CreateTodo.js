@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-export default function CreateTodo({ user, todos, dispatch }) {
+export default function CreateTodo({ user, dispatch }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  //const [dateCreated, setDateCreated] = useState(Date()); -- unnecessary, won't change
 
   return (
     <form
@@ -14,6 +15,9 @@ export default function CreateTodo({ user, todos, dispatch }) {
           description,
           author: user,
           id: uuidv4(),
+          dateCreated: Date(),
+          dateCompleted: "foo",
+          complete: false,
         });
       }}
     >
@@ -34,7 +38,7 @@ export default function CreateTodo({ user, todos, dispatch }) {
         value={description}
         onChange={(event) => setDescription(event.target.value)}
       />
-      <input type="submit" value="Create" />
+      <input type="submit" value="Create" disabled={title.length === 0} />
     </form>
   );
 }

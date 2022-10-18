@@ -18,10 +18,33 @@ function todoReducer(state, action) {
         description: action.description,
         author: action.author,
         id: action.id,
+        dateCreated: action.dateCreated,
+        complete: action.complete,
+        dateCompleted: action.dateCompleted,
       };
       return [newTodo, ...state];
+    // below should change complete field and set the dateCompeted field
+    case "TOGGLE_TODO":
+      // iterating through list of todos to find todo with id that matches passed in id
+      const toggleTodo = state.map((item) => {
+        if (item.id === action.id) {
+          const toggled = {
+            ...item,
+            complete: !item.complete,
+            dateCompleted: Date(),
+            // moved below logic to a ternary in todo...bad idea?
+            //dateCompleted: item.complete === false ? Date() : "Not Yet",
+          };
+          return toggled;
+        }
+        return item;
+      });
+      return toggleTodo;
+    // below should delete a todo with a specific uuid
+    // currently deletes ALL completed todos
     case "DELETE_TODO":
-    case "EDIT_TODO":
+      return state.filter((item) => item.id !== action.id && !item.complete);
+
     default:
       return state;
   }

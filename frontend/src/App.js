@@ -4,6 +4,7 @@ import UserBar from "./Components/User/UserBar";
 import TodoList from "./Components/todo/TodoList";
 import CreateTodo from "./Components/todo/CreateTodo";
 import appReducer from "./Reducers";
+import { StateContext } from "./contexts";
 
 function App() {
   const defaultTodos = [
@@ -30,11 +31,17 @@ function App() {
 
   return (
     <div>
-      <UserBar user={state.user} dispatch={dispatch} />
-      <TodoList todos={state.todos} dispatch={dispatch} />
-      {state.user && (
-        <CreateTodo user={state.user} todos={state.todos} dispatch={dispatch} />
-      )}
+      <StateContext.Provider value={{ state, dispatch }}>
+        <UserBar user={state.user} dispatch={dispatch} />
+        <TodoList todos={state.todos} dispatch={dispatch} />
+        {state.user && (
+          <CreateTodo
+            user={state.user}
+            todos={state.todos}
+            dispatch={dispatch}
+          />
+        )}
+      </StateContext.Provider>
     </div>
   );
 }

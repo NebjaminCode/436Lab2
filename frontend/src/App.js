@@ -32,15 +32,9 @@ function App() {
   return (
     <div>
       <StateContext.Provider value={{ state, dispatch }}>
-        <UserBar user={state.user} dispatch={dispatch} />
-        <TodoList todos={state.todos} dispatch={dispatch} />
-        {state.user && (
-          <CreateTodo
-            user={state.user}
-            todos={state.todos}
-            dispatch={dispatch}
-          />
-        )}
+        <UserBar />
+        <TodoList />
+        {state.user && <CreateTodo />}
       </StateContext.Provider>
     </div>
   );

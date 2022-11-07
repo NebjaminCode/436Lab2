@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { StateContext } from "../../contexts";
 
-function Login({ dispatch }) {
+function Login() {
   // local statehook to keep track of what the user types into the username input
   const [username, setUsername] = useState("");
+  const { dispatch } = useContext(StateContext);
 
   return (
     <form

@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { StateContext } from "../../contexts";
 
-export default function Register({ dispatch }) {
+export default function Register() {
   // local statehooks to keep track of text input fields
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
+
+  const { dispatch } = useContext(StateContext);
 
   // old handleXXXX functions, replaced by lambdas below
   //   function handleUsername(evt) {

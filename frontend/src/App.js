@@ -1,5 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
-import { /*useState,*/ useReducer } from "react";
+import { useReducer, useEffect } from "react";
+import { useResource } from "react-request-hook";
+
 import UserBar from "./Components/User/UserBar";
 import TodoList from "./Components/todo/TodoList";
 import CreateTodo from "./Components/todo/CreateTodo";
@@ -7,6 +9,8 @@ import appReducer from "./Reducers";
 import { StateContext } from "./contexts";
 
 function App() {
+  const defaultTodos = [];
+  /*
   const defaultTodos = [
     {
       title: "first todo",
@@ -23,11 +27,30 @@ function App() {
       dateCreated: Date(Date.now()),
     },
   ];
-
+*/
   const [state, dispatch] = useReducer(appReducer, {
     user: "",
     todos: defaultTodos,
   });
+  /*
+  useEffect(() => {
+    fetch("/api/todos")
+      .then((result) => result.json())
+      .then((todos) => dispatch({ type: "FETCH_TODOS", todos }));
+  }, []);
+*/
+  const [todos, getTodos] = useResource(() => ({
+    url: "/todos",
+    method: "get",
+  }));
+
+  useEffect(getTodos, []);
+
+  useEffect(() => {
+    if (todos && todos.data) {
+      dispatch({ type: "FETCH_TODOS", todos: todos.data.reverse() });
+    }
+  }, [todos]);
 
   return (
     <div>

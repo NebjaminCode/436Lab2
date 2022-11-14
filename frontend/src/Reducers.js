@@ -41,7 +41,9 @@ function todoReducer(state, action) {
     // below should delete a todo with a specific uuid
     // currently deletes ALL completed todos
     // fixed by moving complete check to inside each Todo
-    case "DELETE_TODO":
+    case "FETCH_TODOS":
+      return action.todos;
+    case "DELETE_TODOS":
       return state.filter((item) => item.id !== action.id);
     default:
       return state;

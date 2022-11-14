@@ -1,1 +1,29 @@
-{ "posts": [] }
+{
+  "todos": [
+    {
+      "title": "bloop",
+      "description": "blop",
+      "author": "Ben",
+      "id": "uuidv4()",
+      "dateCreated": "Date(Date.now())"
+    },
+    {
+      "title": "test",
+      "description": "test",
+      "author": "test",
+      "id": "3E84HD9"
+    }
+  ],
+  "users": [
+    {
+      "email": "test@test.com",
+      "password": "$2a$10$b6Wu4AzGKT/.s.PY8gcxv.OoLEJPCrmcpnARmZyecOFLSKrrDCuDi",
+      "id": 1
+    },
+    {
+      "email": "test2@test.com",
+      "password": "$2a$10$LxfC0q8Xg8p8HXVvzVFAoOkcOznNeYYlXIAQ.9Yg5kN6fcFRHC1tC",
+      "id": 2
+    }
+  ]
+}

@@ -1,5 +1,6 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { StateContext } from "../../contexts";
+import { useResource } from "react-request-hook";
 
 export default function Register() {
   // local statehooks to keep track of text input fields
@@ -20,11 +21,24 @@ export default function Register() {
   //     setPasswordRepeat(evt.target.value);
   //   }
 
+  const [user, register] = useResource((username, password) => ({
+    url: "/users",
+    method: "post",
+    data: { email: username, password },
+  }));
+
+  useEffect(() => {
+    if (user && user.data) {
+      dispatch({ type: "REGISTER", username: user.data.user.email });
+    }
+  }, [user]);
+
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        dispatch({ type: "REGISTER", username });
+        register(username, password);
+        // dispatch({ type: "REGISTER", username});
       }}
     >
       <label htmlFor="register-username">Username:</label>

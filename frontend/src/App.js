@@ -1,11 +1,12 @@
 import { v4 as uuidv4 } from "uuid";
-import { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect } from "react";
 import { useResource } from "react-request-hook";
 
 import UserBar from "./Components/User/UserBar";
 import TodoList from "./Components/todo/TodoList";
 import CreateTodo from "./Components/todo/CreateTodo";
 import appReducer from "./Reducers";
+import Header from "./Header";
 import { StateContext } from "./contexts";
 
 function App() {
@@ -55,7 +56,10 @@ function App() {
   return (
     <div>
       <StateContext.Provider value={{ state, dispatch }}>
-        <UserBar />
+        <Header title="ToDo" />
+        <React.Suspense fallback={"Loading..."}>
+          <UserBar />
+        </React.Suspense>
         <TodoList />
         {state.user && <CreateTodo />}
       </StateContext.Provider>

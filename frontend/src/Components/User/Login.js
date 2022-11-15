@@ -20,13 +20,14 @@ function Login() {
   }
 
   useEffect(() => {
-    if (user) {
-      if (user?.data?.user) {
-        setLoginFailed(false);
-        dispatch({ type: "LOGIN", username: user.data.user.email });
-      } else {
-        setLoginFailed(true);
-      }
+    if (user?.data?.user) {
+      setLoginFailed(false);
+      dispatch({ type: "LOGIN", username: user.data.user.email });
+    }
+
+    if (user?.error) {
+      console.log("user.error = " + user.error.data);
+      setLoginFailed(true);
     }
   }, [user]);
 

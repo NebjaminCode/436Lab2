@@ -1,29 +1,29 @@
 {
   "todos": [
     {
-      "title": "bloop",
-      "description": "blop",
-      "author": "Ben",
-      "id": "uuidv4()",
-      "dateCreated": "Date(Date.now())"
+      "title": "test1",
+      "description": "test1",
+      "author": "test@test.com",
+      "id": 1
     },
     {
-      "title": "test",
-      "description": "test",
-      "author": "test",
-      "id": "3E84HD9"
+      "title": "test2",
+      "description": "test2",
+      "author": "test@test.com",
+      "id": 2
+    },
+    {
+      "title": "test3",
+      "description": "test3",
+      "author": "test@test.com",
+      "id": 3
     }
   ],
   "users": [
     {
       "email": "test@test.com",
-      "password": "$2a$10$b6Wu4AzGKT/.s.PY8gcxv.OoLEJPCrmcpnARmZyecOFLSKrrDCuDi",
+      "password": "$2a$10$KjnZdTJrA7Sf18yHWaE0Y.nVP0yRPu.ySq1a3WzAKXknFZbLPMuh.",
       "id": 1
-    },
-    {
-      "email": "test2@test.com",
-      "password": "$2a$10$LxfC0q8Xg8p8HXVvzVFAoOkcOznNeYYlXIAQ.9Yg5kN6fcFRHC1tC",
-      "id": 2
     }
   ]
 }

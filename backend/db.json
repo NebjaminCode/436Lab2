@@ -4,19 +4,15 @@
       "title": "test1",
       "description": "test1",
       "author": "test@test.com",
+      "dateCreated": "Wed Nov 16 2022 22:27:14 GMT-0600 (Central Standard Time)",
       "id": 1
     },
     {
       "title": "test2",
       "description": "test2",
       "author": "test@test.com",
+      "dateCreated": "Wed Nov 16 2022 22:28:33 GMT-0600 (Central Standard Time)",
       "id": 2
-    },
-    {
-      "title": "test3",
-      "description": "test3",
-      "author": "test@test.com",
-      "id": 3
     }
   ],
   "users": [
@@ -24,6 +20,11 @@
       "email": "test@test.com",
       "password": "$2a$10$KjnZdTJrA7Sf18yHWaE0Y.nVP0yRPu.ySq1a3WzAKXknFZbLPMuh.",
       "id": 1
+    },
+    {
+      "email": "test2@test.com",
+      "password": "$2a$10$/vo4NWbW3zSHle6LNwmOX.FWcMTt9wRMjLz8bpmQdFGlvFC8vOxiy",
+      "id": 2
     }
   ]
 }

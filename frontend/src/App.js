@@ -1,67 +1,36 @@
-import { v4 as uuidv4 } from "uuid";
 import React, { useReducer, useEffect } from "react";
 import { useResource } from "react-request-hook";
 
-import UserBar from "./Components/User/UserBar";
-import TodoList from "./Components/todo/TodoList";
 import CreateTodo from "./Components/todo/CreateTodo";
 import appReducer from "./Reducers";
-import Header from "./Header";
 import { StateContext } from "./contexts";
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import Layout from "./pages/Layout";
+import TodoPage from "./pages/TodoPage";
+
 function App() {
-  const defaultTodos = [];
-  /*
-  const defaultTodos = [
-    {
-      title: "first todo",
-      description: "first description",
-      author: "Ben",
-      id: uuidv4(),
-      dateCreated: Date(Date.now()),
-    },
-    {
-      title: "second todo",
-      description: "second description",
-      author: "Ben",
-      id: uuidv4(),
-      dateCreated: Date(Date.now()),
-    },
-  ];
-*/
   const [state, dispatch] = useReducer(appReducer, {
     user: "",
-    todos: defaultTodos,
+    todos: [],
   });
-  /*
-  useEffect(() => {
-    fetch("/api/todos")
-      .then((result) => result.json())
-      .then((todos) => dispatch({ type: "FETCH_TODOS", todos }));
-  }, []);
-*/
-  const [todos, getTodos] = useResource(() => ({
-    url: "/todos",
-    method: "get",
-  }));
-
-  useEffect(getTodos, []);
-
-  useEffect(() => {
-    if (todos && todos.data) {
-      dispatch({ type: "FETCH_TODOS", todos: todos.data.reverse() });
-    }
-  }, [todos]);
 
   return (
     <div>
       <StateContext.Provider value={{ state, dispatch }}>
-        <Header title="ToDo" />
-        <React.Suspense fallback={"Loading..."}>
-          <UserBar />
-        </React.Suspense>
-        <TodoList />
-        {state.user && <CreateTodo />}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<HomePage />} />
+            </Route>
+            <Route path="/todo" element={<Layout />}>
+              <Route path="/todo/create" element={<CreateTodo />} />
+              <Route path="/todo/:id" element={<TodoPage />} />
+              <Route path="*" element={<HomePage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
       </StateContext.Provider>
     </div>
   );

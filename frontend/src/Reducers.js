@@ -2,9 +2,12 @@ function userReducer(state, action) {
   switch (action.type) {
     case "LOGIN":
     case "REGISTER":
-      return action.username;
+      return {
+        username: action.username,
+        access_token: action.access_token,
+      };
     case "LOGOUT":
-      return "";
+      return null;
     default:
       return state;
   }
@@ -43,6 +46,8 @@ function todoReducer(state, action) {
     // fixed by moving complete check to inside each Todo
     case "FETCH_TODOS":
       return action.todos;
+    case "CLEAR_TODOS":
+      return [];
     case "DELETE_TODOS":
       return state.filter((item) => item.id !== action.id);
     default:

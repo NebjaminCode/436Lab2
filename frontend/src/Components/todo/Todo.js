@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useResource, useEffect } from "react";
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Todo({
   title,
@@ -8,7 +9,7 @@ function Todo({
   dateCreated,
   complete,
   dispatch,
-  id,
+  _id,
   dateCompleted,
 }) {
   // const [complete, setComplete] = useState(false);
@@ -16,7 +17,9 @@ function Todo({
 
   return (
     <div>
-      <h3>{title}</h3>
+      <Link to={`/todo/${_id}`}>
+        <h3>{title}</h3>
+      </Link>
       <i>
         Written by <b>{author}</b>
       </i>
@@ -25,14 +28,14 @@ function Todo({
       <br />
 
       {<div>Date Created: {dateCreated}</div>}
-      {<div>Date Completed: {complete ? dateCompleted : "get to work!"}</div>}
+      {<div>Date Completed: {complete ? dateCompleted : "N/A"}</div>}
       <div>
         Complete? {complete ? "Yes" : "No"}
         <input
           id="completeCheck"
           type="checkbox"
           onChange={(event) => {
-            dispatch({ type: "TOGGLE_TODO", id });
+            dispatch({ type: "TOGGLE_TODO", _id });
             //setComplete((event.target.value = !complete));
           }}
         />
@@ -43,7 +46,7 @@ function Todo({
           id="deleteButton"
           onClick={(event) => {
             if (complete) {
-              dispatch({ type: "DELETE_TODO", id });
+              dispatch({ type: "DELETE_TODOS", _id });
             }
           }}
         >

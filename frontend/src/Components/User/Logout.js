@@ -9,7 +9,7 @@ export default function Logout() {
         e.preventDefault();
         dispatch({ type: "CLEAR_TODOS" });
         dispatch({ type: "LOGOUT" });
-      }}
+      }} class="text-primary"
     >
       Logged in as: <b>{state.user.username}</b>
       <input type="submit" value="Logout" />

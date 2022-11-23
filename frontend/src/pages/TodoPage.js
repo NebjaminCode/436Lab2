@@ -18,13 +18,15 @@ export default function TodoPage() {
   }));
   useEffect(getTodos, [id]);
 
-  //   useEffect(() => {
-  //     if (todo.isLoading === false && todo.data) {
-  //       navigate(`/todo/${todo.data.id}`);
-  //     }
-  //   }, [todo.data]);
+    useEffect(() => {
+      if (todo.isLoading === false && todo.data) {
+        navigate(`/todo/${todo.data.id}`);
+      }
+    }, [todo.data]);
 
   return (
+    
     <div>{todo && todo.data ? <Todo {...todo.data} /> : "Loading..."}</div>
+
   );
 }

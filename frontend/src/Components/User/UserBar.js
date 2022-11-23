@@ -13,17 +13,7 @@ export default function UserBar() {
     return <Logout />;
   } else {
     return (
-      <>
-        {/*         
-          {/* create button that renders login or register */}
-        {/* <button
-          id="registerORlogin"
-          onClick={() => {
-            typeUpdate(false);
-          }}
-        />
-        {formType === true ? <Login /> : <Register />} */}
-
+      <>       
         <Login />
         <Register />
       </>

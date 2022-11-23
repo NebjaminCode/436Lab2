@@ -14,11 +14,11 @@ export default function CreateTodo() {
   const { user } = state;
 
   const [todo, createTodo] = useResource(
-    ({ title, description, author, dateCreated }) => ({
+    ({ title, description, author, dateCreated, dateCompleted, complete }) => ({
       url: "/todo",
       method: "post",
       headers: { Authorization: `${state.user.access_token}` },
-      data: { title, description, dateCreated },
+      data: { title, description, dateCreated, dateCompleted, complete },
     })
   );
 
@@ -33,8 +33,8 @@ export default function CreateTodo() {
         author: user.username,
         id: todo.data.id,
         dateCreated: todo.data.dateCreated,
-        //dataCompleted: "foo",
-        complete: false,
+        dataCompleted: "N/A",
+        complete: todo.data.complete,
         description: todo.data.description,
       });
     }
@@ -50,6 +50,7 @@ export default function CreateTodo() {
           description,
           author: user,
           dateCreated: Date(),
+          complete: false,
         });
         // commented out and moved to effect hook above
         // dispatch({

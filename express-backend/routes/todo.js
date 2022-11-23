@@ -14,7 +14,7 @@ router.use(function (req, res, next) {
       });
     } catch (error) {
       console.log(`Error Message: ${error.message}, Trace ID: ${req.traceId}`);
-      return res.status(401).json({ error: `Ya done goofed.` });
+      return res.status(401).json({ error: `Authorization messed up` });
     }
   } else {
     return res.status(401).json({ error: "Unauthorized" });
@@ -28,7 +28,8 @@ router.post("/", async function (req, res) {
     description: req.body.description,
     author: req.payload.id,
     dateCreated: req.body.dateCreated,
-    complete: false,
+    dateCompleted: req.body.dateCompleted,
+    complete: req.body.complete,
   });
   return todo
     .save()
@@ -39,6 +40,7 @@ router.post("/", async function (req, res) {
         description: savedTodo.description,
         author: savedTodo.author,
         dateCreated: savedTodo.dateCreated,
+        dateCompleted: savedTodo.dateCompleted,
         complete: savedTodo.complete,
         // send back username here too
       });
@@ -59,23 +61,41 @@ router.get("/:id", async function (req, res, next) {
   return res.status(200).json(todo);
 });
 
-// // messeeeddddd up. FIX
-// router.delete("/:id", async function (req, res, next) {
-//   const todo = await Todo.findByIdAndDelete("_id").exec();
-//   return res.status(200).json(todo);
-//   // ().where("_id").equals(req.params.id).exec();
-//   // return res.status(200).json(todo);
-// });
+router.delete("/:id", async function (req, res, next) {
+  const todo = await Todo.deleteOne().where("_id").equals(req.params.id).exec();
+  return res.status(200).json(todo);
+});
 
-// // for updating complete
-// router.put("/:id", async function (req, res, next) {
-//   const selectedTodo = { _id: req.params.id };
-//   const updateTodo = {
-//     title: req.body.title,
-//     description: req.body.description,
-//     author: req.payload.id,
-//     dateCreated: req.body.dateCreated,
-//   };
+// messeeeddddd up. FIX
+router.delete("/:id", async function (req, res, next) {
+  const todo = await Todo.deleteOne().where("_id").equals(req.params.id).exec();
+  return res.status(200).json(todo);
+  // ().where("_id").equals(req.params.id).exec();
+  // return res.status(200).json(todo);
+});
+
+// for updating complete
+router.patch("/:id", async function (req, res, next) {
+  const todo = await Todo.findOneAndUpdate().where("_id").equals(req.params.id).exec();
+  todo.complete = req.body.complete,
+  todo.dateCompleted = Date();
+  todo.save();
+  return res.status(200).json(todo);
+  // const updatedTodo = await Todo.findOne().where("_id").equals(req.params.id).exec();
+  // updatedTodo.complete = req.body.complete,
+  // updatedTodo.save();
+  // return res.status(200).json(updatedTodo);
+  
+  // const selectedTodo = { _id: req.params.id };
+  // const updateTodo = {
+  //   title: req.body.title,
+  //   description: req.body.description,
+  //   author: req.payload.id,
+  //   dateCreated: req.body.dateCreated,
+  // }
+  return res.status(200).json(todo);
+
+});
 
 //   const todo = await Todo.findOneAndUpdate(selectedTodo, updateTodo);
 //   return res.status(200).json(todo);

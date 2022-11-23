@@ -30,13 +30,17 @@ function todoReducer(state, action) {
     case "TOGGLE_TODO":
       // iterating through list of todos to find todo with id that matches passed in id
       const toggleTodo = state.map((item) => {
-        if (item.id === action.id) {
-          const toggled = {
+        if (item._id === action._id) {
+          // const toggled = {
+          //   ...item,
+          //   complete: !item.complete,
+          //   dateCompleted: Date(),
+          // };
+          return {
             ...item,
-            complete: !item.complete,
-            dateCompleted: Date(),
+            dateCompleted: action.dateCompleted,
+            complete: action.complete,
           };
-          return toggled;
         }
         return item;
       });
@@ -49,7 +53,7 @@ function todoReducer(state, action) {
     case "CLEAR_TODOS":
       return [];
     case "DELETE_TODOS":
-      return state.filter((item) => item.id !== action.id);
+      return state.filter((item) => item._id !== action._id);
     default:
       return state;
   }

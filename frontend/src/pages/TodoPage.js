@@ -8,21 +8,21 @@ import Todo from "../Components/todo/Todo";
 
 export default function TodoPage() {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { _id } = useParams();
   const { state, dispatch } = useContext(StateContext);
 
   const [todo, getTodos] = useResource(() => ({
-    url: `/todo/${id}`,
+    url: `/todo/${_id}`,
     method: "get",
     headers: { Authorization: `${state.user.access_token}` },
   }));
-  useEffect(getTodos, [id]);
+  useEffect(getTodos, [_id]);
 
-    useEffect(() => {
-      if (todo.isLoading === false && todo.data) {
-        navigate(`/todo/${todo.data.id}`);
-      }
-    }, [todo.data]);
+  useEffect(() => {
+    if (todo.isLoading === false && todo.data) {
+      navigate(`/todo/${todo.data._id}`);
+    }
+  }, [todo.data]);
 
   return (
     

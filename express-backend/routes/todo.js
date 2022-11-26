@@ -13,7 +13,7 @@ router.use(function (req, res, next) {
         algorithms: ["RS256"],
       });
     } catch (error) {
-      console.log(`Error Message: ${error.message}, Trace ID: ${req.traceId}`);
+      //console.log(`Error Message: ${error.message}, Trace ID: ${req.traceId}`);
       return res.status(401).json({ error: `Authorization messed up` });
     }
   } else {
@@ -56,15 +56,16 @@ router.get("/", async function (req, res, next) {
   return res.status(200).json({ todos: todos });
 });
 
+// DELETE UNDERSCORE FOR FAKE FIX
 router.get("/:id", async function (req, res, next) {
-  const todo = await Todo.findOne().where("_id").equals(req.params.id).exec();
+  const todo = await Todo.findOne().where("id").equals(req.params.id).exec();
   return res.status(200).json(todo);
 });
 
-router.delete("/:id", async function (req, res, next) {
-  const todo = await Todo.deleteOne().where("_id").equals(req.params.id).exec();
-  return res.status(200).json(todo);
-});
+// router.delete("/:id", async function (req, res, next) {
+//   const todo = await Todo.deleteOne().where("_id").equals(req.params.id).exec();
+//   return res.status(200).json(todo);
+// });
 
 // messeeeddddd up. FIX
 router.delete("/:id", async function (req, res, next) {
@@ -78,7 +79,7 @@ router.delete("/:id", async function (req, res, next) {
 router.patch("/:id", async function (req, res, next) {
   const todo = await Todo.findOneAndUpdate().where("_id").equals(req.params.id).exec();
   todo.complete = req.body.complete,
-  todo.dateCompleted = Date();
+  todo.dateCompleted = new Date().toLocaleString();
   todo.save();
   return res.status(200).json(todo);
   // const updatedTodo = await Todo.findOne().where("_id").equals(req.params.id).exec();

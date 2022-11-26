@@ -73,24 +73,24 @@ function Todo({
 },[toUpdate])
 
   return (
-    <div id="TodosInTodoTodo" class="p-3 mb-2 bg-light text-dark" style={{ borderRadius: '1em' }}>
-      <Link to={`/todo/${_id}`} style={{ textDecoration: 'none' }}>
-        <h3>{title}</h3>
+    <div id="TodosInTodoTodo" className="p-3 mb-2 bg-light text-dark" style={{ borderRadius: '1em' }}>
+      <Link to={`/todo/${_id}`} style={{ textDecoration: 'none', color: 'black' }}>
+        <h4>{title}</h4>
       </Link>
-      <i>
-        Written by <b>{author}</b>
-      </i>
+      <h6>
+        Written by <b>{state.user.username}</b>
+      </h6>
+      {<div>Date Created: {dateCreated}</div>}
       <br />
-      <div>{description}</div>
+      <div className="p-3 mb-2 bg-light text-dark">{description}</div>
       <br />
 
-      {<div>Date Created: {dateCreated}</div>}
       {<div>Date Completed: {complete ? dateCompleted : "N/A"}</div>}
       <div>
         Complete?
         
         <Button variant="primary" onClick={(e) => {
-            let newdateCompleted = new Date().toString();
+            let newdateCompleted = new Date().toLocaleString();
             toggleTodo(title, description, author, dateCreated, dateCompleted, complete, _id, newdateCompleted);
             // dispatch({ type: "TOGGLE_TODO", _id });
           }}>{complete ? "Yes" : "No"}</Button>{' '}
@@ -118,7 +118,6 @@ function Todo({
       >
         Delete Completed Todo?  
         </Button>{' '}
-
 
 
         {/* <button

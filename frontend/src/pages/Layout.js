@@ -18,23 +18,30 @@ export default function Layout() {
     <Navbar bg="dark" expand="lg" fixed="top">
       <Container>
         <Navbar.Brand href="#home">
-          <Link to="/" style={{ textDecoration: 'none' }}>
-            <Header title="ToDo" />
+          <Link to="/" style={{ textDecoration: 'none', paddingLeft: '5%' }}>
+            <Header title="Todo" />
           </Link>
-          </Navbar.Brand>
-          </Container>
+        </Navbar.Brand>
+      </Container>
         
-        
-          <React.Suspense fallback={"Loading..."}>
-            <UserBar />
-          </React.Suspense>{" "}
-        </Navbar>
-        <div  class="p-3 mb-2 bg-secondary text-white" id="content">
-            <br />
-            <div id="bloop" style={{marginTop: "4em"}} >
-            {(user) && <Link to="/todo/create" style={{ textDecoration: 'none' }}>Create New Todo</Link>}
-        </div>
-      <Outlet />
+      <React.Suspense fallback={"Loading..."}>
+          <UserBar />
+      </React.Suspense>{" "}
+    </Navbar>
+        <div  className="p-3 mb-2 bg-secondary text-white" id="content" style={{ minHeight: '100vh'}}>
+          <br />
+            
+          {/* <div id="bloop" className="p-3 mb-2 bg-light text-dark" style={{margin: 'auto', paddingLeft: "1em", paddingRight: "1em", borderRadius: "1em", width: '50%', textAlign: 'center', marginTop: "5em", marginBottom: "2em"}} >
+              {(user) && <Link to="/todo/create" style={{ textDecoration: 'none'}}>Create New Todo</Link>}
+          </div> */}
+
+          {(user) && <Link to="/todo/create" style={{ textDecoration: 'none'}}>
+            <div className="p-3 mb-2 bg-light text-dark" style={{textDecoration: 'none', margin: 'auto', paddingLeft: "1em", paddingRight: "1em", borderRadius: "1em", textAlign: 'center', marginTop: "6em"}} >
+              Create New Todo
+            </div>
+          </Link>}
+
+          <Outlet />
       </div>  
     </>
     

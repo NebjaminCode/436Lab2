@@ -49,7 +49,7 @@ export default function CreateTodo() {
           title,
           description,
           author: user,
-          dateCreated: Date(),
+          dateCreated: new Date().toLocaleString(),
           complete: false,
         });
         // commented out and moved to effect hook above

@@ -101,15 +101,14 @@ function Todo({
 
 <div style={{display:'flex',  alignSelf:'center'}}>
       <div>
-        Complete?
         <Button variant="secondary" onClick={(e) => {
             let newdateCompleted = new Date().toLocaleString();
             toggleTodo(title, description, author, dateCreated, dateCompleted, complete, _id, newdateCompleted);
             // dispatch({ type: "TOGGLE_TODO", _id });
-          }}>{complete ? "Yes" : "No"}</Button>{' '}
+          }}>{complete ? "Complete!" : "Complete?"}</Button>{' '}
       </div>
  
-      <div>
+      <div style={{marginLeft:'auto'}}>
 
       <Button id="deleteButton" variant="secondary" 
       onClick={(e) => {

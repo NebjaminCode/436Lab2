@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { StateContext } from "../../contexts";
+import Container from "react-bootstrap/Container";
 
 import Login from "./Login";
 import Register from "./Register";
@@ -10,12 +11,22 @@ export default function UserBar() {
   // const [formType, typeUpdate] = useState(true);
 
   if (state.user) {
-    return <Logout />;
+    return (
+      <Container>
+        <Logout />
+      </Container>
+    );
   } else {
     return (
-      <>       
-        <Login />
-        <Register />
+      <>
+        <Container>
+          <Container>
+            <Login />
+          </Container>
+          <Container>
+            <Register />
+          </Container>
+        </Container>
       </>
     );
   }

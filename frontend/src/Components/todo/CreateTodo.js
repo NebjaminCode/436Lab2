@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useResource } from "react-request-hook";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { StateContext } from "../../contexts";
 
@@ -12,6 +13,8 @@ export default function CreateTodo() {
 
   const { state, dispatch } = useContext(StateContext);
   const { user } = state;
+
+  const navigate = useNavigate();
 
   const [todo, createTodo] = useResource(
     ({ title, description, author, dateCreated, dateCompleted, complete }) => ({
@@ -52,6 +55,7 @@ export default function CreateTodo() {
           dateCreated: new Date().toLocaleString(),
           complete: false,
         });
+        navigate(`/`);
         // commented out and moved to effect hook above
         // dispatch({
         //   type: "CREATE_TODO",

@@ -26,7 +26,7 @@ function App() {
   });
 
   return (
-    <div style={{ background: "chocolate", minHeight:"100vh"}} id="secondFromRoot">
+    <div style={{ background: "grey", minHeight:"100vh"}} id="secondFromRoot">
       <Container style={{minHeight:'100vh'}}>
         <StateContext.Provider value={{ state, dispatch }}>
           <BrowserRouter>

@@ -3,6 +3,7 @@ import {useResource} from 'react-request-hook';
 import React from "react";
 import { StateContext } from "../../contexts";
 import { Link } from "react-router-dom";
+import Container from 'react-bootstrap/Container';
 
 import Button from 'react-bootstrap/Button';
 
@@ -74,41 +75,43 @@ function Todo({
 
   return (
     <div id="TodosInTodoTodo" className="p-3 mb-2 bg-light text-dark" style={{ borderRadius: '1em' }}>
-      <Link to={`/todo/${_id}`} style={{ textDecoration: 'none', color: 'black' }}>
-        <h4>{title}</h4>
-      </Link>
-      <h6>
-        Written by <b>{state.user.username}</b>
-      </h6>
-      {<div>Date Created: {dateCreated}</div>}
-      <br />
-      <div className="p-3 mb-2 bg-light text-dark">{description}</div>
-      <br />
 
-      {<div>Date Completed: {complete ? dateCompleted : "N/A"}</div>}
+{/* div for todo and author */}      
+      <div>
+        
+        <Link to={`/todo/${_id}`} style={{ textDecoration: 'none', color: 'black' }}>
+          <h4>{title}</h4>
+        </Link>
+
+        <h6>
+          Written by <b>{state.user.username}</b>
+        </h6>
+      </div>
+
+{/* dates */}
+      <div>
+        {<div>Date Created: {dateCreated}</div>}
+        {<div>Date Completed: {complete ? dateCompleted : "N/A"}</div>}
+      </div>
+
+{/* description */}
+      <div>
+      <div className="p-3 mb-2 bg-light text-dark">{description}</div>
+      </div>
+
+<div style={{display:'flex',  alignSelf:'center'}}>
       <div>
         Complete?
-        
-        <Button variant="primary" onClick={(e) => {
+        <Button variant="secondary" onClick={(e) => {
             let newdateCompleted = new Date().toLocaleString();
             toggleTodo(title, description, author, dateCreated, dateCompleted, complete, _id, newdateCompleted);
             // dispatch({ type: "TOGGLE_TODO", _id });
           }}>{complete ? "Yes" : "No"}</Button>{' '}
-
-        {/* <button
-          id="completeCheck"
-          type="button"
-          onClick={(e) => {
-            let newdateCompleted = new Date().toString();
-            toggleTodo(title, description, author, dateCreated, dateCompleted, complete, _id, newdateCompleted);
-            // dispatch({ type: "TOGGLE_TODO", _id });
-          }}
-        >{complete ? "Yes" : "No"}</button> */}
       </div>
  
       <div>
 
-      <Button id="deleteButton" variant="primary" 
+      <Button id="deleteButton" variant="secondary" 
       onClick={(e) => {
               if (complete) {
                 deleteTodo(_id);
@@ -119,20 +122,8 @@ function Todo({
         Delete Completed Todo?  
         </Button>{' '}
 
-
-        {/* <button
-          id="deleteButton"
-          onClick={(event) => {
-            if (complete) {
-              deleteTodo(_id);
-              dispatch({ type: "DELETE_TODOS", _id });
-            }
-          }}
-        >
-          Delete Completed Todo?
-        </button> */}
       </div>
-
+</div>
       <br />
     </div>
   );

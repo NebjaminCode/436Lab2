@@ -36,7 +36,7 @@ export default function Layout() {
           </div> */}
 
           {(user) && <Link to="/todo/create" style={{ textDecoration: 'none'}}>
-            <div className="p-3 mb-2 bg-light text-dark" style={{textDecoration: 'none', margin: 'auto', paddingLeft: "1em", paddingRight: "1em", borderRadius: "1em", textAlign: 'center', marginTop: "6em"}} >
+            <div className="p-3 mb-4 bg-light text-dark" style={{textDecoration: 'none', margin: 'auto', paddingLeft: "1em", paddingRight: "1em", borderRadius: "1em", textAlign: 'center', marginTop: "7em"}} >
               Create New Todo
             </div>
           </Link>}

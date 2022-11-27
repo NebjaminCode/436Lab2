@@ -26,7 +26,7 @@ export default function TodoPage() {
 
   return (
     
-    <div>{todo && todo.data ? <Todo {...todo.data} /> : "Loading..."}</div>
+    <div >{todo && todo.data ? <Todo {...todo.data} /> : "Loading..."}</div>
 
   );
 }
